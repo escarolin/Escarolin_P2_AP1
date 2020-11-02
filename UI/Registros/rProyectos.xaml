@@ -6,12 +6,8 @@
         xmlns:local="clr-namespace:Escarolin_P2_AP1.UI.Registros"
         mc:Ignorable="d"
         Title="rProyectos" Height="620" Width="810" WindowStartupLocation="CenterScreen" Icon="/Imagenes/reg.png">
-    <Grid Margin="0,0,224,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="67*"/>
-            <RowDefinition Height="5*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="69,10,0,0" Grid.RowSpan="2">
+   <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Proyecto Id" FontWeight="Bold" FontSize="16"/>
             <!--——————————————————————————————————————————————[ BUSCAR ]——————————————————————————————————————————————-->
             <StackPanel Orientation="Horizontal" Height="35">
@@ -37,7 +33,7 @@
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <StackPanel Orientation="Vertical">
                                 <Label Content="Tipo de tarea"/>
-                                <ComboBox x:Name="TipoTareaComboBox" Width="100" Margin="0,0,10,0"/>
+                                <ComboBox x:Name="DescripcionTComboBox" Width="100" Margin="0,0,10,0"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Vertical">
@@ -64,7 +60,7 @@
                         <DataGrid x:Name="DetalleDataGrid" ItemsSource="{Binding Detalle}" Height="80" AutoGenerateColumns="False" Margin="0,10,0,0">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="TipoId" Binding="{Binding TareaId}"/>
-                                <DataGridTextColumn Header="Tipo Tarea" Binding="{Binding Tipo.TipoTarea}"/>
+                                <DataGridTextColumn Header="Tipo Tarea" Binding="{Binding tareas.DescripcionT}"/>
                                 <DataGridTextColumn Header="Requerimiento" Binding="{Binding Requerimiento}"/>
                                 <DataGridTextColumn Header="Tiempo" Binding="{Binding Tiempo}"/>
                             </DataGrid.Columns>
@@ -78,14 +74,10 @@
                                     <Label Content="Remover fila seleccionada"/>
                                 </StackPanel>
                             </Button>
-                            <!--——————————————————————[ TiempoTotal ]——————————————————————-->
-                            <Label Content="Tiempo Total" Margin="60,0,0,0" FontWeight="Bold" />
-                            <TextBox x:Name="TiempoTotalTextBox" Text="{Binding TiempoTotal}" Width="150" IsReadOnly="True" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </StackPanel>
-                </GroupBox>
-            </StackPanel>
-            <!--——————————————————————————————————————————————[ DETALLE FIN ]——————————————————————————————————————————————-->
+                         
+               
+            
+        
 
             <!--——————————————————————————————————————————————[ BOTON NUEVO ]——————————————————————————————————————————————-->
             <StackPanel Orientation="Horizontal" Height="35" Margin="0,5,0,0" HorizontalAlignment="Center">
@@ -111,7 +103,7 @@
                 </Button>
             </StackPanel>
 
-            <!--————————————————————————————————————————————————————————————————————————————————————————————————————————————-->
-        </StackPanel>
+     </StackPanel>
+     
     </Grid>
 </Window>
