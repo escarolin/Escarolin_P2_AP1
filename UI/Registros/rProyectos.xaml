@@ -43,7 +43,7 @@
 
                             <StackPanel Orientation="Vertical">
                                 <Label Content="Tiempo (minutos)" Margin="5,0" />
-                                <TextBox x:Name="TiempoTextBox" Height="22" Margin="10,0" TextChanged="TiempoTextBox_TextChanged"/>
+                               
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
@@ -104,6 +104,6 @@
             </StackPanel>
 
      </StackPanel>
-     
+
     </Grid>
 </Window>
