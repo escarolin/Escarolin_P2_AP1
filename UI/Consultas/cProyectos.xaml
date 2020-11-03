@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Escarolin_P2_AP1.UI.Consultas"
         mc:Ignorable="d"
-        Title="Consultar Proyectos" Height="450" Width="800" WindowStartupLocation="CenterScreen"  Icon="/Imagenes/cons.png">
+        Title="Consultar Proyectos" Height="500" Width="800" WindowStartupLocation="CenterScreen"  Icon="/Imagenes/cons.png">
     <Grid>
- <StackPanel Orientation="Vertical" Margin="0,5,0,0" HorizontalAlignment="Center" >
+        <StackPanel Orientation="Vertical" Margin="0,5,0,0" HorizontalAlignment="Center" >
 
             <StackPanel Orientation="Horizontal" Height="60">
-                
+
 
                 <StackPanel Margin="0,0,20,0" >
                     <Label Content="Filtro:" />
@@ -26,10 +26,19 @@
 
                 </StackPanel>
 
-                <Button x:Name="BuscarButton" Height="30" Width="100" Click="ConsultarButton_Click" Margin="30,0,0,0" >
+                <Button x:Name="BuscarButton" Height="33" Width="107" Click="ConsultarButton_Click" Margin="30,12,0,0" >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Imagenes/Buscar.png" Width="25"  />
-                        <Label Content="Consultar" />
+                        <Label Content="Consultar" RenderTransformOrigin="0.5,0.5" >
+                            <Label.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="1.502"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Label.RenderTransform>
+                        </Label>
                     </StackPanel>
                 </Button>
 
@@ -41,7 +50,7 @@
                         <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat='dd/MM/yyyy'}"/>
                         <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}"/>
                         <DataGridTextColumn Header="Tiempo Total" Binding="{Binding TiempoTotal}"/>
-                        
+
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
