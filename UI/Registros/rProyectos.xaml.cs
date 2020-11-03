@@ -28,8 +28,7 @@ namespace Escarolin_P2_AP1.UI.Registros
             DescripcionTComboBox.DisplayMemberPath = "DescripcionT";
         }
           
-        
-        //——————————————————————————————————————————————————————————————[ Cargar ]———————————————————————————————————————————————————————————————
+         //——————————————————————————————————————————————————————————————[ Cargar ]———————————————————————————————————————————————————————————————
         private void Cargar()
         {
             this.DataContext = null;
@@ -82,26 +81,28 @@ namespace Escarolin_P2_AP1.UI.Registros
                 TareaId = Convert.ToInt32(DescripcionTComboBox.SelectedValue.ToString()),
                 tareas = ((Tareas)DescripcionTComboBox.SelectedItem),
                 Requerimiento = (RequerimientoTextBox.Text),
-               
+                Tiempo = Convert.ToSingle(TiempoTextBox.Text)
             };
-            
+            //——————————————————————————————[Tiempo Total]——————————————————————————————
+            proyectos.TiempoTotal += Convert.ToDouble(TiempoTextBox.Text.ToString());
+            //——————————————————————————————————————————————————————————————————————————
             this.proyectos.Detalle.Add(filaDetalle);
             Cargar();
 
             DescripcionTComboBox.SelectedIndex = -1;
             RequerimientoTextBox.Clear();
-           
+            TiempoTextBox.Clear();
         }
         //——————————————————————————————————————————————————————————————[ Remover Fila ]———————————————————————————————————————————————————————————————
         private void RemoverFilaButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //double total = Convert.ToDouble(TiempoTotalTextBox.Text);
+                double total = Convert.ToDouble(TiempoTotalTextBox.Text);
                 if (DetalleDataGrid.Items.Count >= 1 && DetalleDataGrid.SelectedIndex <= DetalleDataGrid.Items.Count - 1)
                 {
                     proyectos.Detalle.RemoveAt(DetalleDataGrid.SelectedIndex);
-                   // proyectos.TiempoTotal -= total;
+                    proyectos.TiempoTotal -= total;
                     Cargar();
                 }
             }
@@ -157,6 +158,23 @@ namespace Escarolin_P2_AP1.UI.Registros
                 }
                 else
                     MessageBox.Show("No se pudo eliminar el registro", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        //——————————————————————————————————————————————————————————————[ Tiempo - TextChanged ]———————————————————————————————————————————————————————————————
+        private void TiempoTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (TiempoTextBox.Text.Trim() != "")
+                {
+                    double resultado = double.Parse(TiempoTextBox.Text);
+                }
+            }
+            catch
+            {
+                MessageBox.Show($"El valor digitado en el campo (Tiempo) no es un numero.\n\nPorfavor, digite un numero.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Warning);
+                TiempoTextBox.Clear();
+                TiempoTextBox.Focus();
             }
         }
       
