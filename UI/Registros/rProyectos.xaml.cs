@@ -82,28 +82,26 @@ namespace Escarolin_P2_AP1.UI.Registros
                 TareaId = Convert.ToInt32(DescripcionTComboBox.SelectedValue.ToString()),
                 tareas = ((Tareas)DescripcionTComboBox.SelectedItem),
                 Requerimiento = (RequerimientoTextBox.Text),
-                Tiempo = Convert.ToSingle(TiempoTextBox.Text)
+               
             };
-            //——————————————————————————————[Tiempo Total]——————————————————————————————
-            proyectos.TiempoTotal += Convert.ToDouble(TiempoTextBox.Text.ToString());
-            //——————————————————————————————————————————————————————————————————————————
+            
             this.proyectos.Detalle.Add(filaDetalle);
             Cargar();
 
             DescripcionTComboBox.SelectedIndex = -1;
             RequerimientoTextBox.Clear();
-            TiempoTextBox.Clear();
+           
         }
         //——————————————————————————————————————————————————————————————[ Remover Fila ]———————————————————————————————————————————————————————————————
         private void RemoverFilaButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                double total = Convert.ToDouble(TiempoTotalTextBox.Text);
+                //double total = Convert.ToDouble(TiempoTotalTextBox.Text);
                 if (DetalleDataGrid.Items.Count >= 1 && DetalleDataGrid.SelectedIndex <= DetalleDataGrid.Items.Count - 1)
                 {
                     proyectos.Detalle.RemoveAt(DetalleDataGrid.SelectedIndex);
-                    proyectos.TiempoTotal -= total;
+                   // proyectos.TiempoTotal -= total;
                     Cargar();
                 }
             }
