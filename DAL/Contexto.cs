@@ -6,7 +6,7 @@ namespace Escarolin_P2_AP1.DAL
 {
     public class Contexto : DbContext
     {
-              public DbSet<Tareas> Tareas { get; set; }
+        public DbSet<Tareas> Tareas { get; set; }
         public DbSet<Proyectos> Proyectos { get; set; }
        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

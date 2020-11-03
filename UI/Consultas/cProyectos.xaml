@@ -41,7 +41,7 @@
                         <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat='dd/MM/yyyy'}"/>
                         <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}"/>
                         <DataGridTextColumn Header="Tiempo Total" Binding="{Binding TiempoTotal}"/>
-                        <DataGridTextColumn Header="Detalle" Binding="{Binding Detalle}"/>
+                        
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

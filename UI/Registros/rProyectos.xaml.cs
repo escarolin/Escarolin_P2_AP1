@@ -22,25 +22,26 @@ namespace Escarolin_P2_AP1.UI.Registros
         public rProyectos()
         {
             InitializeComponent();
+            this.DataContext = proyectos;
           
             DescripcionTComboBox.ItemsSource = TareasBLL.GetTareas();
             DescripcionTComboBox.SelectedValuePath = "TareaId";
             DescripcionTComboBox.DisplayMemberPath = "DescripcionT";
         }
           
-         //——————————————————————————————————————————————————————————————[ Cargar ]———————————————————————————————————————————————————————————————
+         // carga 
         private void Cargar()
         {
             this.DataContext = null;
             this.DataContext = proyectos;
         }
-        //——————————————————————————————————————————————————————————————[ Limpiar ]——————————————————————————————————————————————————————————————
+        //Limpiar
         private void Limpiar()
         {
             this.proyectos = new Proyectos();
             this.DataContext = proyectos;
         }
-        //——————————————————————————————————————————————————————————————[ Validar ]——————————————————————————————————————————————————————————————
+        //Validar
         private bool Validar()
         {
             bool Validado = true;
@@ -52,7 +53,7 @@ namespace Escarolin_P2_AP1.UI.Registros
 
             return Validado;
         }
-        //——————————————————————————————————————————————————————————————[ Buscar ]———————————————————————————————————————————————————————————————
+        //Buscar
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
             Proyectos encontrado = ProyectosBLL.Buscar(proyectos.ProyectoId);
@@ -61,18 +62,17 @@ namespace Escarolin_P2_AP1.UI.Registros
             {
                 proyectos = encontrado;
                 Cargar();
-                //MessageBox.Show("Proyecto Encontrado", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
                 MessageBox.Show($"Este Proyecto no fue encontrado.\n\nAsegurese que existe o cree uno nuevo.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 Limpiar();
-                //—————————————————————————————————————[ Limpiar y hacer focus en el Id]—————————————————————————————————————
-                ProyectoIdTextbox.Text = "";
+              
+                ProyectoIdTextbox.Clear();
                 ProyectoIdTextbox.Focus();
             }
         }
-        //——————————————————————————————————————————————————————————————[ Agregar Fila ]———————————————————————————————————————————————————————————————
+        //Agregar Fila
         private void AgregarFilaButton_Click(object sender, RoutedEventArgs e)
         {
             var filaDetalle = new Proyectos_Detalle
@@ -83,9 +83,9 @@ namespace Escarolin_P2_AP1.UI.Registros
                 Requerimiento = (RequerimientoTextBox.Text),
                 Tiempo = Convert.ToSingle(TiempoTextBox.Text)
             };
-            //——————————————————————————————[Tiempo Total]——————————————————————————————
+            
             proyectos.TiempoTotal += Convert.ToDouble(TiempoTextBox.Text.ToString());
-            //——————————————————————————————————————————————————————————————————————————
+            
             this.proyectos.Detalle.Add(filaDetalle);
             Cargar();
 
@@ -93,16 +93,20 @@ namespace Escarolin_P2_AP1.UI.Registros
             RequerimientoTextBox.Clear();
             TiempoTextBox.Clear();
         }
-        //——————————————————————————————————————————————————————————————[ Remover Fila ]———————————————————————————————————————————————————————————————
+        //Remover
         private void RemoverFilaButton_Click(object sender, RoutedEventArgs e)
         {
             try
+
             {
+                var detalle = (Proyectos_Detalle)DetalleDataGrid.SelectedItem;
                 double total = Convert.ToDouble(TiempoTotalTextBox.Text);
                 if (DetalleDataGrid.Items.Count >= 1 && DetalleDataGrid.SelectedIndex <= DetalleDataGrid.Items.Count - 1)
                 {
+                    proyectos.TiempoTotal = proyectos.TiempoTotal - detalle.Tiempo;
                     proyectos.Detalle.RemoveAt(DetalleDataGrid.SelectedIndex);
-                    proyectos.TiempoTotal -= total;
+                    //proyectos.TiempoTotal -= total;
+                   
                     Cargar();
                 }
             }
@@ -111,12 +115,12 @@ namespace Escarolin_P2_AP1.UI.Registros
                 MessageBox.Show("No has seleccionado ninguna Fila\n\nSeleccione la Fila a Remover.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        //——————————————————————————————————————————————————————————————[ Nuevo ]———————————————————————————————————————————————————————————————
+        //Nuevo
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
         {
             Limpiar();
         }
-        //——————————————————————————————————————————————————————————————[ Guardar ]———————————————————————————————————————————————————————————————
+        //Guardar
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
             {
@@ -141,13 +145,13 @@ namespace Escarolin_P2_AP1.UI.Registros
                 if (paso)
                 {
                     Limpiar();
-                    MessageBox.Show("Transaccion Exitosa", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Registro guardado", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
-                    MessageBox.Show("Transaccion Fallida", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Registro no gaudardado", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        //——————————————————————————————————————————————————————————————[ Eliminar ]———————————————————————————————————————————————————————————————
+        //Eliminar
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
             {
@@ -160,12 +164,12 @@ namespace Escarolin_P2_AP1.UI.Registros
                     MessageBox.Show("No se pudo eliminar el registro", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        //——————————————————————————————————————————————————————————————[ Tiempo - TextChanged ]———————————————————————————————————————————————————————————————
+        //Tiempo 
         private void TiempoTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
-                if (TiempoTextBox.Text.Trim() != "")
+                if (TiempoTextBox.Text.Trim() != string.Empty)
                 {
                     double resultado = double.Parse(TiempoTextBox.Text);
                 }
@@ -180,5 +184,3 @@ namespace Escarolin_P2_AP1.UI.Registros
       
         }
     }
-
-

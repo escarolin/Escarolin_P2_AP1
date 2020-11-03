@@ -24,7 +24,7 @@ namespace Escarolin_P2_AP1.BLL
 
             return paso;
         }
-        //—————————————————————————————————————————————————————[ INSERTAR ]—————————————————————————————————————————————————————
+        //Insertar
         public static bool Insertar(Proyectos proyectos)
         {
             Contexto contexto = new Contexto();
@@ -51,7 +51,7 @@ namespace Escarolin_P2_AP1.BLL
 
             return paso;
         }
-        //—————————————————————————————————————————————————————[ MODIFICAR ]—————————————————————————————————————————————————————
+        //Modificar
         public static bool Modificar(Proyectos proyectos)
         {
             Contexto contexto = new Contexto();
@@ -59,7 +59,7 @@ namespace Escarolin_P2_AP1.BLL
 
             try
             {
-                contexto.Database.ExecuteSqlRaw($"Delete From ProyectosDetalle Where ProyectoId={proyectos.ProyectoId}");
+                contexto.Database.ExecuteSqlRaw($"Delete From Proyectos_Detalle Where ProyectoId={proyectos.ProyectoId}");
 
                 foreach (var item in proyectos.Detalle)
                 {
@@ -80,7 +80,7 @@ namespace Escarolin_P2_AP1.BLL
 
             return paso;
         }
-        //—————————————————————————————————————————————————————[ ELIMINAR ]—————————————————————————————————————————————————————
+        //Eliminar
         public static bool Eliminar(int id)
         {
             bool paso = false;
@@ -105,7 +105,7 @@ namespace Escarolin_P2_AP1.BLL
 
             return paso;
         }
-        //—————————————————————————————————————————————————————[ GETLIST ]—————————————————————————————————————————————————————
+        //GetList
         public static List<Proyectos> GetList(Expression<Func<Proyectos, bool>> criterio)
         {
             List<Proyectos> lista = new List<Proyectos>();
@@ -126,7 +126,7 @@ namespace Escarolin_P2_AP1.BLL
 
             return lista;
         }
-        //—————————————————————————————————————————————————————[ EXISTE ]—————————————————————————————————————————————————————
+        //Existe
         public static bool Existe(int id)
         {
             bool encontrado = false;
@@ -147,7 +147,7 @@ namespace Escarolin_P2_AP1.BLL
 
             return encontrado;
         }
-        //—————————————————————————————————————————————————————[ BUSCAR ]————————————————————————————————————————————————————
+        //Buscar
         public static Proyectos Buscar(int id)
         {
             Proyectos proyectos = new Proyectos();
